@@ -27,7 +27,7 @@ li $t3, 77 # def   [7] elemento
 sw $t3, 28($t1) # carrega o elemento no vetor
 li $t3, 81 # def   [8] elemento
 sw $t3, 32($t1) # carrega o elemento no vetor
-li $t3, 81 # def   [9] elemento
+li $t3, 99 # def   [9] elemento
 sw $t3, 36($t1) # carrega o elemento no vetor
 
 add $t3, $zero, $zero # zera o reg T3
@@ -35,20 +35,14 @@ add $t3, $zero, $zero # zera o reg T3
 loop_principal: bgt $t3, 9, ordena_linhas_mat # loop para percorrer o vetor USANDO $T3
 add $t4 ,$t3, $t3
 add $t4, $t4, $t4 # calculando o offset do vetor colocado em $t4
-add $t4, $t4, $t0 # endereço de A[i]
+add $t4, $t4, $t1 # endereço de A[i]
 lw $t5, 0($t4) # carrega em T5 A[i]
 add $t4, $zero, $zero # zera o registrador T4 após o uso
 addi $t3, $t3, 1 # incrementando a variável do laço
-j bucket_sort
+j func_bucket_sort
 
-# registradores T0 T1 T3 não posem ser sobrescritos nessa função
-func_bucket_sort: bgt $t4, 10, func_bucket_sort_maiores_10
-# código para pegar o resto 
-
-func_bucket_sort_maiores_10:
-# código para pegar a parte inteira
-
-func_bucket_sort_fim:
+# registradores T0 T1 T3 e T5 não pode ser alterado não posem ser sobrescritos nessa função
+func_bucket_sort:
 # pular para func_inserir_mat com a linha na qual o númeor deve ser inserido
 
 func_inserir_mat:
